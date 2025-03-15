@@ -5,6 +5,12 @@ export const useATMStore = create((set) => ({
    balance: 10000,
    value: 0,
 
+   deposit: (amount) => {
+      set((state) => {
+         return {balance: state.balance + amount}
+      })
+   },
+
    withdraw: (amount) => {
       set((state) => {
          if(state.balance >= amount){

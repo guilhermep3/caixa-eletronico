@@ -3,16 +3,20 @@ import { useATMStore } from "@/store/ATMstore"
 import { Button } from "./button"
 
 export const ModalConfirm = ({ showModalConfirm, setShowModalConfirm, actionModal }) => {
-   const { value, withdraw, setValue } = useATMStore();
+   const { value, withdraw, setValue, deposit, balance } = useATMStore();
 
    function handleConfirm() {
-      withdraw(value);
-      setShowModalConfirm();
+      if(actionModal === 'deposit'){
+         deposit(value);
+         setShowModalConfirm();
+      } else {
+         withdraw(value);
+         setShowModalConfirm();
+      }
    };
 
    function handleCloseModal() {
       setShowModalConfirm(false);
-      setPasswordTyped('');
       setValue(0);
    }
    return (
@@ -24,6 +28,7 @@ export const ModalConfirm = ({ showModalConfirm, setShowModalConfirm, actionModa
                onClick={handleCloseModal}>x</span>
             <div className="text-center border-b-2 border-gray-400 mb-4">
                <h1 className="text-lg mb-2">
+                  {actionModal === 'deposit' && `Você irá depositar R$ ${value.toLocaleString('pt-BR')}`}
                   {actionModal === 'withdraw' && `Você ira sacar R$ ${value.toLocaleString('pt-BR')}`}
                   {actionModal === 'transfer' && `Você ira transferir R$ ${value.toLocaleString('pt-BR')}`}
                </h1>

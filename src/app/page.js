@@ -8,15 +8,23 @@ import { CiMoneyBill } from "react-icons/ci";
 import { FiSend } from "react-icons/fi";
 import { ModalTransfer } from "@/components/modalTransfer";
 import { ModalConfirm } from "@/components/modalConfirm";
+import { FaPlus } from "react-icons/fa";
+import { ModalDeposit } from "@/components/modalDeposit";
 
 export default function Home() {
    const [showModalPassword, setShowModalPassword] = useState(false);
+   const [showModalDeposit, setShowModalDeposit] = useState(false);
    const [showModalWithdraw, setShowModalWithdraw] = useState(false);
    const [showModalCPF, setShowModalCPF] = useState(false);
    const [showModalTransfer, setShowModalTransfer] = useState(false);
    const [showModalConfirm, setShowModalConfirm] = useState(false);
    const [actionModal, setActionModal] = useState(null); //withdraw ou transfer
    const { balance } = useATMStore();
+
+   function handleOpenDeposit(){
+      setActionModal('deposit');
+      setShowModalPassword(true);
+   }
 
    function handleOpenWithdraw() {
       setActionModal('withdraw');
@@ -34,7 +42,10 @@ export default function Home() {
    }
 
    function handlePasswordSuccess() {
-      if (actionModal === 'withdraw') {
+      if(actionModal === 'deposit'){
+         setShowModalPassword(false);
+         setShowModalDeposit(true);
+      } else if (actionModal === 'withdraw') {
          setShowModalPassword(false);
          setShowModalWithdraw(true);
       } else if (actionModal === 'transfer') {
@@ -58,12 +69,16 @@ export default function Home() {
                </div>
                <div className="grid grid-cols-2 items-end gap-3 sm:gap-5 pt-8 h-full">
                   <button className="w-full h-14 bg-blue-900 text-white rounded-xl text-sm sm:text-base flex justify-center items-center cursor-pointer"
+                     onClick={() => handleOpenDeposit()}>
+                     <FaPlus className="size-5 sm:size-7 mr-1 -ml-1 sm:mr-3 sm:-ml-3" /> DEPOSITAR
+                  </button>
+                  <button className="w-full h-14 bg-blue-900 text-white rounded-xl text-sm sm:text-base flex justify-center items-center cursor-pointer"
                      onClick={() => handleOpenWithdraw()}>
-                     <CiMoneyBill className="size-6 sm:size-7 mr-1 -ml-1" /> SACAR
+                     <CiMoneyBill className="size-6 sm:size-7 mr-1 -ml-1 sm:mr-3 sm:-ml-3" /> SACAR
                   </button>
                   <button className="w-full h-14 bg-blue-900 text-white rounded-xl text-sm sm:text-base flex justify-center items-center cursor-pointer"
                      onClick={() => handleOpenCPF()}>
-                     <FiSend className="size-5 sm:size-7 mr-1 -ml-1" /> TRANSFERIR
+                     <FiSend className="size-5 sm:size-7 mr-1 -ml-1 sm:mr-3 sm:-ml-3" /> TRANSFERIR
                   </button>
                </div>
             </div>
@@ -78,6 +93,11 @@ export default function Home() {
                </div>
             </div>
          </div>
+         <ModalDeposit
+            showModalDeposit={showModalDeposit}
+            setShowModalDeposit={setShowModalDeposit}
+            handleOpenConfirm={handleOpenConfirm}
+         />
          <ModalPassword
             showModalPassword={showModalPassword}
             setShowModalPassword={setShowModalPassword}
@@ -92,7 +112,6 @@ export default function Home() {
             showModalWithdraw={showModalWithdraw}
             setShowModalWithdraw={setShowModalWithdraw}
             handleOpenConfirm={handleOpenConfirm}
-            actionModal={actionModal}
          />
          <ModalCPF
             showModalCPF={showModalCPF}

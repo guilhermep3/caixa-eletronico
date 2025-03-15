@@ -45,6 +45,7 @@ export const ModalCPF = ({ showModalCPF, setShowModalCPF, handleOpenTransfer }) 
                      allowEmptyFormatting={false}
                      value={cpfTyped}
                      onValueChange={(e) => setCpfTyped(e.value)}
+                     onKeyDown={(e) => e.key === 'Enter' && handleCheckCPF()}
                      className="w-full bg-zinc-300 p-2 rounded-lg border border-gray-400"
                   />
                   <p ref={errorMsg} className="text-sm text-red-700 invisible">valor acima do saldo</p>

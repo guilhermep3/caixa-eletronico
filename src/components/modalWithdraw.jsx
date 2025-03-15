@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { Button } from "./button"
 import { useATMStore } from "@/store/ATMstore";
 
-export const ModalWithdraw = ({ showModalWithdraw, setShowModalWithdraw, handleOpenConfirm, actionModal }) => {
+export const ModalWithdraw = ({ showModalWithdraw, setShowModalWithdraw, handleOpenConfirm }) => {
    const errorMsg = useRef();
    const [withdrawTyped, setWithdrawTyped] = useState('');
    const { balance, setValue } = useATMStore();

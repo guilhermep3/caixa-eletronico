@@ -5,14 +5,13 @@ import { useATMStore } from "@/store/ATMstore";
 export const ModalTransfer = ({ showModalTransfer, setShowModalTransfer, handleOpenConfirm }) => {
    const errorMsg = useRef();
    const [valueTyped, setValueTyped] = useState('');
-   const { balance, withdraw, setValue } = useATMStore();
+   const { balance, setValue } = useATMStore();
 
-   function handleCheckWithDraw() {
+   function handleCheckTransfer() {
       if (valueTyped === '') {
          errorMsg.current.classList.add('visible');
          errorMsg.current.innerHTML = 'Digite um valor';
       } else if (balance > valueTyped) {
-         withdraw(valueTyped);
          setValue(valueTyped);
          setShowModalTransfer(false);
          setValueTyped('');
@@ -39,11 +38,11 @@ export const ModalTransfer = ({ showModalTransfer, setShowModalTransfer, handleO
                      className="w-full bg-zinc-300 p-2 rounded-lg border border-gray-400"
                      value={valueTyped}
                      onChange={(e) => setValueTyped(e.target.value)}
-                     onKeyDown={(e) => e.key === 'Enter' && handleCheckWithDraw()}
+                     onKeyDown={(e) => e.key === 'Enter' && handleCheckTransfer()}
                   />
                   <p ref={errorMsg} className="text-sm text-red-700 invisible">valor acima do saldo</p>
                </div>
-               <Button text={'Enviar'} onClick={handleCheckWithDraw} />
+               <Button text={'Enviar'} onClick={handleCheckTransfer} />
             </div>
          </div>
       </div>
