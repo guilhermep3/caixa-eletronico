@@ -22,13 +22,18 @@ export const ModalWithdraw = ({ showModalWithdraw, setShowModalWithdraw, handleO
       }
    };
 
+   function handleCloseModal(){
+      setWithdrawTyped('');
+      setShowModalWithdraw(false);
+   }
+
    return (
       <div
          className={`fixed top-0 left-0 w-full h-full z-40 flex justify-center items-center bg-black/50 transition duration-300
                ${showModalWithdraw ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'}`}>
          <div className="relative w-11/12 max-w-96 bg-gray-200 p-5 rounded-xl -mt-24 sm:mt-0">
             <span className="absolute top-1 right-2 text-xl text-zinc-800 cursor-pointer"
-               onClick={() => setShowModalWithdraw(false)}>x</span>
+               onClick={handleCloseModal}>x</span>
             <div className="text-center border-b-2 border-gray-400 mb-4">
                <h1 className="text-lg mb-2">Digite o valor para sacar:</h1>
             </div>

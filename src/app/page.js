@@ -59,7 +59,7 @@ export default function Home() {
    }
 
    return (
-      <div className="w-full min-h-screen flex justify-center items-center bg-gray-800">
+      <div className="flex flex-col justify-center items-center w-full min-h-screen bg-gray-800">
          <div className="w-11/12 max-w-[640px] bg-zinc-700 p-4 sm:p-6 rounded-xl">
             <div className="flex flex-col w-full h-96 bg-gray-200 p-2 sm:p-4 rounded-md border-2 border-zinc-900">
                <div className="text-center border-b-2 border-gray-400 pb-7 text-black">
@@ -125,6 +125,10 @@ export default function Home() {
             handleOpenConfirm={handleOpenConfirm}
             actionModal={actionModal}
          />
+         <p className="text-zinc-300 mt-5 sm:mt-10 text-sm">
+            Desenvolvido por
+            <a href="https://github.com/guilhermep3" target="_blank" className="hover:underline">Guilherme Pereira</a>
+         </p>
       </div>
    );
 }
