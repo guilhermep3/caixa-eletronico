@@ -18,7 +18,7 @@ export default function Home() {
    const [showModalCPF, setShowModalCPF] = useState(false);
    const [showModalTransfer, setShowModalTransfer] = useState(false);
    const [showModalConfirm, setShowModalConfirm] = useState(false);
-   const [actionModal, setActionModal] = useState(null); //withdraw ou transfer
+   const [actionModal, setActionModal] = useState(null); //deposit || withdraw || transfer
    const { balance } = useATMStore();
 
    function handleOpenDeposit(){
@@ -126,8 +126,7 @@ export default function Home() {
             actionModal={actionModal}
          />
          <p className="text-zinc-300 mt-5 sm:mt-10 text-sm">
-            Desenvolvido por
-            <a href="https://github.com/guilhermep3" target="_blank" className="hover:underline">Guilherme Pereira</a>
+            Desenvolvido por <a href="https://github.com/guilhermep3" target="_blank" className="underline">Guilherme Pereira</a>
          </p>
       </div>
    );
